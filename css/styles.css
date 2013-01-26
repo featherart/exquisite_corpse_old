@@ -1,0 +1,60 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body{
+	font-family:Arial, Helvetica, sans-serif;
+}
+
+canvas#drawing {
+	border:#666 1px solid;
+	cursor: crosshair;
+}
+
+div#outer {
+	width:500px;
+	margin: 50px auto 0px auto; 
+	}
+
+div#canvas {
+	
+}
+
+div#save {
+	text-align: center;
+}
+
+div#debug {
+	margin-top: 20px;
+	text-align: center;
+}
+div#previous {
+	margin-top: 20px;
+	text-align: center;
+}
+.failed {
+	color: #f00;
+}
+
+.previmg {
+	border: #666 1px solid;
+	margin-top: 5px;
+}
+
+.noselect {
+    /* Prevent text selection */
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+}
+
+/* this is an id */
+#Red{
+	color:#F00;
+	font-size:4px;
+}
+/* this is a class */
+.newClass{
+
+}
