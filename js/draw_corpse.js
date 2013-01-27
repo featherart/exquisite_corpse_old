@@ -5,7 +5,13 @@ $(function() {
   context.fillRect(0,0,canvas.width(),canvas.height());
   var button_is_down = false;
 
-  $(document).mouseup(function() {
+  $(document).mouseup(function(e) {
+    if(button_is_down) {
+      var x = e.pageX - this.offsetLeft;
+      var y = e.pageY - this.offsetTop;
+      context.lineTo(x,y);
+      context.stroke();
+    }
     button_is_down = false;
     $('body').removeClass('noselect');
   });
@@ -19,10 +25,10 @@ $(function() {
     button_is_down = true;
   });
 
-  canvas.bind('mousemove mouseup',function(e) {
+  $(document).mousemove(function(e) {
     if(button_is_down) {
-      var x = e.pageX - this.offsetLeft;
-      var y = e.pageY - this.offsetTop;
+      var x = e.pageX - canvas[0].offsetLeft;
+      var y = e.pageY - canvas[0].offsetTop;
       context.lineTo(x,y);
       context.stroke();
     }
