@@ -49,12 +49,3 @@ div#previous {
     user-select: none;
 }
 
-/* this is an id */
-#Red{
-	color:#F00;
-	font-size:4px;
-}
-/* this is a class */
-.newClass{
-
-}

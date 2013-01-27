@@ -1,3 +1,9 @@
+<?php
+$db = new SQLite3('db/ExquisiteCorpse.sqlite3',SQLITE3_OPEN_READWRITE);
+$user_uid = null;
+$user_id = null;
+require_once("userid.php");
+?>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -12,8 +18,6 @@
 </head>
 
 <body>
-
-	<!--<button onclick="draw(0,0);">draw</button>-->
 	<div id="outer">
 		<div id="canvas">
 			<canvas id="drawing" width="500" height="200"><p>Your browser doesn't support canvas</p></canvas>
@@ -24,8 +28,9 @@
 	</div>
 	<div id="previous">
 	<?php
-		foreach (glob("saves/*.png") as $filename) {
-			echo '<div class="prevdiv"><img class="previmg" width="250" height="100" src="'.$filename.'"/></div>';
+		$q = $db->query("SELECT * FROM drawings WHERE artist = $user_id ORDER BY id DESC");
+		while($r = $q->fetchArray(SQLITE3_ASSOC)) {
+			echo '<div class="prevdiv"><img class="previmg" width="250" height="100" src="' . $r['path'] . '"/></div>';
 		}
 	?>
 	</div>

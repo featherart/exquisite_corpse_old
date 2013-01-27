@@ -1,4 +1,13 @@
 <?php
+if(!isset($_COOKIE['ec'])) {
+	header("HTTP/1.0 404 Not Found");
+	die;
+}
+$db = new SQLite3('db/ExquisiteCorpse.sqlite3',SQLITE3_OPEN_READWRITE);
+$user_uid = null;
+$user_id = null;
+require_once("userid.php");
+
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$imageurl = $_POST["image"];
 	$imageurl = str_replace("data:","data://",$imageurl);  // @todo only do the first one?
@@ -14,7 +23,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	} while(file_exists($filename));
 	file_put_contents($filename,$image);
 	$basename = $dir . '/' . basename($filename);
-	echo $basename;
+	if($db->exec("INSERT INTO drawings(type,path,artist) VALUES (0,'" . $basename  . "',$user_id)")) {	
+		echo $basename;
+	} else {
+		header("HTTP/1.0 404 Not Found");
+	}
 } else {
 	header("HTTP/1.0 404 Not Found");
 }
